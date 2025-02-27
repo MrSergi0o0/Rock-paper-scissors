@@ -3,6 +3,14 @@ from random import randint
 
 pygame.init()
 
+pygame.mixer.init()
+
+pygame.mixer.music.load("music.mp3")  
+
+pygame.mixer.music.play(-1)
+
+pygame.mixer.music.set_volume(0.7)
+
 WIDTH = 600
 HEIGHT = 600
 
@@ -111,9 +119,9 @@ while game:
         fight = True
 
     ############
-    str(my_score), str(enemy_score)
-    screen.blit(text_score, text_score_rect)
-    int(my_score), int(enemy_score)
+    #str(my_score), str(enemy_score)
+    #screen.blit(text_score, text_score_rect)
+    #int(my_score), int(enemy_score)
     ############
 
     if fight == True:
