@@ -44,7 +44,7 @@ paper = False
 scissors = False
 fight = False
 
-enemy_item_select = randint(1, 3)
+enemy_item_select = randint(1, 6)
 
 my_score = 0
 enemy_score = 0
@@ -70,15 +70,17 @@ while game:
 
     text_score_rect = (text_score := font.render(str(my_score) + ":" + str(enemy_score), True, (100, 100, 100))).get_rect(topleft=(10, 200))
 
-    if enemy_item_select == 1:
+    if enemy_item_select == 1 or enemy_item_select == 4:
         enemy_item = "rock"
         enemy_item_image = rock_image
-    if enemy_item_select == 2:
+    elif enemy_item_select == 2 or enemy_item_select == 5:
         enemy_item = "paper"
         enemy_item_image = paper_image
-    if enemy_item_select == 3:
+    elif enemy_item_select == 3 or enemy_item_select == 6:
         enemy_item = "scissors"
         enemy_item_image = scissors_image
+    else:
+        enemy_item = "none"
 
     if start == False:
         screen.blit(start_btn, (170, 170))
@@ -117,12 +119,10 @@ while game:
         screen.blit(scissors_image, (200, 300))
         my_item = "scissors"
         fight = True
-
-    ############
-    #str(my_score), str(enemy_score)
-    #screen.blit(text_score, text_score_rect)
-    #int(my_score), int(enemy_score)
-    ############
+    
+    str(my_score), str(enemy_score)
+    screen.blit(text_score, text_score_rect)
+    int(my_score), int(enemy_score)
 
     if fight == True:
         screen.blit(enemy_item_image, (200, 100))
@@ -138,22 +138,28 @@ while game:
         if my_item == "rock" and enemy_item == "scissors":
             my_score += 1
             screen.blit(text_win, text_win_rect)
+            enemy_item_select = 0
         if my_item == "paper" and enemy_item == "rock":
             my_score += 1
             screen.blit(text_win, text_win_rect)
+            enemy_item_select = 0
         if my_item == "scissors" and enemy_item == "paper":
             my_score += 1
             screen.blit(text_win, text_win_rect)
+            enemy_item_select = 0
 
         if my_item == "rock" and enemy_item == "paper":
             enemy_score += 1
             screen.blit(text_lose, text_lose_rect)
+            enemy_item_select = 0
         if my_item == "paper" and enemy_item == "scissors":
             enemy_score += 1
             screen.blit(text_lose, text_lose_rect)
+            enemy_item_select = 0
         if my_item == "scissors" and enemy_item == "rock":
             enemy_score += 1
             screen.blit(text_lose, text_lose_rect)
+            enemy_item_select = 0
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             if next_btn_rect.collidepoint(event.pos):
@@ -165,5 +171,3 @@ while game:
                 enemy_item_select = randint(1, 3)
 
     pygame.display.flip()
-
-################ music, seting, fix score
